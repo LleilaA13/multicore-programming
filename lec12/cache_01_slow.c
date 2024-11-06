@@ -3,6 +3,8 @@
 #include <time.h>
 #include "my_timer.h"
 
+
+
 double A[MAX][MAX];
 double x[MAX];
 double y[MAX];   
@@ -23,17 +25,18 @@ int main(int argc, char** argv) {
     for(iter = 0; iter < ITER; iter++){
         double start, stop;
         GET_TIME(start);
-        for (j = 0; j < MAX; j++)
+        for (j = 0; j < MAX; j++) //tanti miss perche la matrice A è assegnata come array lunghissimo stiamo saltanod da una riga allaltra -> accessi randomici , non lineari
             for (i = 0; i < MAX; i++)        
                 y[i] += A[i][j]*x[j];
         GET_TIME(stop);
         total_time += stop-start;
     }
-
+ //in C le matrici memorizzate in righe
+ //si risolve invertendo i for 
     /**
     for (i = 0; i < MAX; i++)
         printf("%f\n", y[i]);
     **/
 
-    printf("Average runtime %f usec\n", total_time/ITER);
+    printf("Average runtime %f sec\n", total_time/ITER);
 }
